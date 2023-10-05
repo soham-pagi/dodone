@@ -36,6 +36,8 @@ class TaskData extends ChangeNotifier {
         _remainingTasks += task.isDone ? 0 : 1;
         _tasks.add(task);
       }
+
+      notifyListeners();
     } catch(e) {
       // print('Error $e');
     }
