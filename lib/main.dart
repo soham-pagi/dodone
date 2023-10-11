@@ -23,6 +23,10 @@ class DoDone extends StatelessWidget {
 
     return MaterialApp(
       theme: ThemeData(
+        primaryColor: const Color(0xFF3FBAC2),
+        scaffoldBackgroundColor: const Color(0xFF3FBAC2),
+        colorScheme: ColorScheme.fromSwatch(accentColor: const Color(0xFF3FBAC2)),
+        fontFamily: 'Comfortaa',
         inputDecorationTheme: const InputDecorationTheme(
           floatingLabelStyle: TextStyle(color: Color(0xFF00ADB5)),
           border: OutlineInputBorder(),

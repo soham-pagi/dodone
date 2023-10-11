@@ -19,11 +19,11 @@ class BrandTitle extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("DoDone", style: TextStyle(color: Colors.white, fontFamily: 'SnapITC', fontSize: fontSize)),
+          Text("DoDone", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: fontSize)),
           const SizedBox(height: 10.0),
           Text(
             '   ${remainingTasks == 0 ? 'All Done!' : '$remainingTasks ${remainingTasks <= 1 ? 'Task' : 'Tasks'} remaining'}',
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w500, fontSize: 18.0),
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.normal, fontSize: 20.0),
           ),
         ],
       ),

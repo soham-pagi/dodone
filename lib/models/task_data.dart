@@ -46,7 +46,10 @@ class TaskData extends ChangeNotifier {
     }
   }
 
-  void createTask(title, description) {
+  void createTask(String title, String description) {
+    if (description.isEmpty) {
+      description = 'No Description'; // Set default description if null or empty string is passed
+    }
     Task task = Task(title: title, description: description);
     _tasks.add(task);
     _remainingTasks++;

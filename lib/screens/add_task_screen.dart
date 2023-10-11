@@ -26,7 +26,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Text('Add New Task', textAlign: TextAlign.center, style: TextStyle(color: const Color(0xFF3FBAC2), fontSize: 35.0, fontWeight: FontWeight.w500)),
+          Text('Add New Task', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0, fontWeight: FontWeight.w600)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: TextField(
@@ -74,7 +74,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
             },
             style: ButtonStyle(
               minimumSize: MaterialStateProperty.all<Size>(Size(MediaQuery.of(context).size.width - 40, 50)),
-              backgroundColor: MaterialStateProperty.all<Color>(const Color(0xFF3FBAC2)),
+              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               )),

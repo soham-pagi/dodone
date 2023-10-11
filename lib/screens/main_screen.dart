@@ -10,7 +10,6 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFF3FBAC2),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
@@ -22,8 +21,7 @@ class MainScreen extends StatelessWidget {
             }
           );
         },
-        backgroundColor: const Color(0xFF3FBAC2),
-        child: const Icon(Icons.add),
+        child: const Icon(Icons.add, color: Color(0xFFD3D4D8)),
       ),
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,

@@ -26,7 +26,7 @@ class TaskScreen extends StatelessWidget {
             key: Key(index.toString()),
             tilePadding: const EdgeInsets.symmetric(horizontal: 20.0),
             childrenPadding: const EdgeInsets.only(top: 5.0, left: 35.0, right: 35.0, bottom: 20.0),
-            title: Text(task.title, style: TextStyle(decoration: task.isDone ? TextDecoration.lineThrough : null)),
+            title: Text(task.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600, decoration: task.isDone ? TextDecoration.lineThrough : null)),
             leading: Checkbox(
               onChanged: (newValue) {
                 taskData.updateTask(task);
@@ -41,9 +41,9 @@ class TaskScreen extends StatelessWidget {
               },
               icon: const Icon(Icons.delete_forever, color: Colors.deepOrange),
             ),
-            shape: Border.all(color: Colors.transparent, width: 0.0),
+            shape: Border.all(color: Colors.transparent),
             children: [
-              Text(task.description, style: const TextStyle(fontSize: 17.0)),
+              Text(task.description, style: const TextStyle(fontSize: 20.0)),
             ],
           );
         },

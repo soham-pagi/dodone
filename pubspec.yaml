@@ -24,6 +24,10 @@ flutter:
   uses-material-design: true
 
   fonts:
-    - family: SnapITC
+    - family: Comfortaa
       fonts:
-        - asset: fonts/Snap.ttf
+#        - asset: fonts/Comfortaa/Comfortaa-Bold.ttf
+#        - asset: fonts/Comfortaa/Comfortaa-Light.ttf
+#        - asset: fonts/Comfortaa/Comfortaa-Medium.ttf
+        - asset: fonts/Comfortaa/Comfortaa-Regular.ttf
+        - asset: fonts/Comfortaa/Comfortaa-SemiBold.ttf
