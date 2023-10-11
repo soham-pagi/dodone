@@ -11,7 +11,7 @@ class TaskScreen extends StatelessWidget {
 
     return  Container(
       decoration: const BoxDecoration(
-        color: Color(0xFFD3D4D8),
+        color: Color(0xFFD3D4D8), // light grey
         borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))
       ),
       child: ListView.builder(
@@ -39,7 +39,7 @@ class TaskScreen extends StatelessWidget {
               onPressed: () {
                 taskData.deleteTask(task);
               },
-              icon: const Icon(Icons.delete_forever, color: Colors.deepOrange),
+              icon: Icon(Icons.delete_forever, color: Color(0xFF8B0000)),
             ),
             shape: Border.all(color: Colors.transparent),
             children: [
