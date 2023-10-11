@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'screens/main_screen.dart';
 import 'models/task_data.dart';
+import 'services/notification_service.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().init();
   runApp(
     ChangeNotifierProvider(
       create: (context) => TaskData(),
-      child: DoDone(),
+      child: const DoDone(),
     ),
   );
 }
@@ -17,8 +20,16 @@ class DoDone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: MainScreen()
+
+    return MaterialApp(
+      theme: ThemeData(
+        inputDecorationTheme: const InputDecorationTheme(
+          floatingLabelStyle: TextStyle(color: Color(0xFF00ADB5)),
+          border: OutlineInputBorder(),
+          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF11BFAE), width: 1.0)),// Change the border color when focused
+        ),
+      ),
+      home: const SafeArea(child: MainScreen())
     );
   }
 }

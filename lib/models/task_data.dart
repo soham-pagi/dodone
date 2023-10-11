@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:collection';
 import 'task.dart';
+import 'package:my_todo/services/notification_service.dart';
 
 class TaskData extends ChangeNotifier {
   final List<Task> _tasks = [];
@@ -38,19 +39,23 @@ class TaskData extends ChangeNotifier {
       }
 
       notifyListeners();
+
+      NotificationService().scheduleNotification(_remainingTasks);
     } catch(e) {
       // print('Error $e');
     }
   }
 
-  void createTask(name) {
-    Task task = Task(name: name);
+  void createTask(title, description) {
+    Task task = Task(title: title, description: description);
     _tasks.add(task);
     _remainingTasks++;
 
     saveTasksToSharedPreferences();
 
     notifyListeners();
+
+    NotificationService().scheduleNotification(_remainingTasks);
   }
 
   void updateTask(Task task) {
@@ -60,6 +65,8 @@ class TaskData extends ChangeNotifier {
     saveTasksToSharedPreferences();
 
     notifyListeners();
+
+    NotificationService().scheduleNotification(_remainingTasks);
   }
 
   void deleteTask(Task task) {
@@ -69,6 +76,8 @@ class TaskData extends ChangeNotifier {
     saveTasksToSharedPreferences();
 
     notifyListeners();
+
+    NotificationService().scheduleNotification(_remainingTasks);
   }
 
   UnmodifiableListView<Task> get allTasks {

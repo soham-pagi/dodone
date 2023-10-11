@@ -9,7 +9,8 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightBlueAccent,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xFF3FBAC2),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
@@ -21,14 +22,17 @@ class MainScreen extends StatelessWidget {
             }
           );
         },
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: const Color(0xFF3FBAC2),
         child: const Icon(Icons.add),
       ),
       body: const Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // BrandTitle(),
           BrandTitle(),
-          TaskScreen()
+          Expanded(child: TaskScreen()),
+          // Expanded(flex: 1, child: BrandTitle()),
+          // Expanded(flex: 5, child: TaskScreen()),
         ],
       ),
     );

@@ -9,34 +9,45 @@ class TaskScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var taskData = Provider.of<TaskData>(context);
 
-    return  Flexible(
-      flex: 4,
-      child: Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))
-        ),
-        child: ListView.builder(
-          padding: const EdgeInsets.only(top: 15),
-          itemBuilder: (context, index) {
-            final task = taskData.allTasks[index];
+    return  Container(
+      decoration: const BoxDecoration(
+        color: Color(0xFFD3D4D8),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(20.0), topRight: Radius.circular(20.0))
+      ),
+      child: ListView.builder(
+        padding: const EdgeInsets.only(top: 20.0),
+        itemBuilder: (BuildContext context, int index) {
+          final task = taskData.allTasks[index];
 
-            return ListTile(
-              contentPadding: const EdgeInsets.symmetric(horizontal: 25.0),
-              title: Text(task.name, style: TextStyle(decoration: task.isDone ? TextDecoration.lineThrough : null)),
-              trailing: Checkbox(
-                onChanged: (newValue) {
-                  taskData.updateTask(task);
-                },
-                value: task.isDone,
-              ),
-              onLongPress: () {
+          return ExpansionTile(
+            expandedAlignment: Alignment.centerLeft,
+            expandedCrossAxisAlignment: CrossAxisAlignment.start,
+            textColor: const Color(0xFF00ADB5),
+            key: Key(index.toString()),
+            tilePadding: const EdgeInsets.symmetric(horizontal: 20.0),
+            childrenPadding: const EdgeInsets.only(top: 5.0, left: 35.0, right: 35.0, bottom: 20.0),
+            title: Text(task.title, style: TextStyle(decoration: task.isDone ? TextDecoration.lineThrough : null)),
+            leading: Checkbox(
+              onChanged: (newValue) {
+                taskData.updateTask(task);
+              },
+              value: task.isDone,
+              activeColor: const Color(0xFF3FBAC2),
+
+            ),
+            trailing: IconButton(
+              onPressed: () {
                 taskData.deleteTask(task);
               },
-            );
-          },
-          itemCount: taskData.taskSize,
-        ),
+              icon: const Icon(Icons.delete_forever, color: Colors.deepOrange),
+            ),
+            shape: Border.all(color: Colors.transparent, width: 0.0),
+            children: [
+              Text(task.description, style: const TextStyle(fontSize: 17.0)),
+            ],
+          );
+        },
+        itemCount: taskData.taskSize,
       ),
     );
   }

@@ -1,10 +1,11 @@
 import 'dart:convert';
 
 class Task {
-  String name;
+  String title;
+  String description;
   bool isDone;
 
-  Task({required this.name, this.isDone = false});
+  Task({required this.title, this.description = '', this.isDone = false});
 
   void toggleIsDone() {
     isDone = !isDone;
@@ -12,14 +13,16 @@ class Task {
 
   String toJson() {
     return jsonEncode({
-      "name": name,
+      "name": title,
+      "description": description,
       "isDone": isDone
     });
   }
 
   factory Task.fromJson(Map<String, dynamic> json) {
     return Task(
-      name: json['name'],
+      title: json['name'],
+      description: json['description'],
       isDone: json['isDone']
     );
   }
