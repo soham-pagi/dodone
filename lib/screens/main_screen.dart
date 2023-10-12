@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'task_screen.dart';
 import 'brand_title.dart';
-import 'add_task_screen.dart';
+import 'add_or_update_task_screen.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             context: context,
             builder: (BuildContext context) {
-              return const AddTaskScreen();
+              return AddOrUpdateTaskScreen();
             }
           );
         },

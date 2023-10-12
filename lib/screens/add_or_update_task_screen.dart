@@ -1,18 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo/models/task.dart';
 import 'package:provider/provider.dart';
 import 'package:my_todo/models/task_data.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class AddTaskScreen extends StatefulWidget {
-  const AddTaskScreen({super.key});
+class AddOrUpdateTaskScreen extends StatefulWidget {
+  late bool addScreen;
+  late Task? task;
+  late String title;
+  late String description;
+
+  AddOrUpdateTaskScreen({super.key, this.addScreen = true, this.title = '', this.description = '', this.task});
 
   @override
-  State<AddTaskScreen> createState() => _AddTaskScreenState();
+  State<AddOrUpdateTaskScreen> createState() => _AddOrUpdateTaskScreenState();
 }
 
-class _AddTaskScreenState extends State<AddTaskScreen> {
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
+class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
+  late final TextEditingController _titleController;
+  late final TextEditingController _descriptionController;
+  late final bool _addScreen;
+  late final Task? _task;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _task = widget.task;
+    _addScreen = widget.addScreen;
+    _titleController = TextEditingController(text: widget.title);
+    _descriptionController = TextEditingController(text: widget.description);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +44,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text('Add New Task', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0, fontWeight: FontWeight.w600)),
+          Text(_addScreen ? 'New Task' : 'Update Task', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0, fontWeight: FontWeight.w600)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: TextField(
@@ -69,7 +87,12 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 return;
               }
 
-              context.read<TaskData>().createTask(title, description);
+              if (_addScreen) {
+                context.read<TaskData>().createTask(title, description);
+              } else {
+                context.read<TaskData>().editTask(_task, title, description);
+              }
+
               Navigator.pop(context);
             },
             style: ButtonStyle(
@@ -79,7 +102,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               )),
             ),
-            child: const Text('Add', style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500)),
+            child: Text(_addScreen ? 'Add' : 'Update', style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500)),
           )
         ],
       ),

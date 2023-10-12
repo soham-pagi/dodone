@@ -24,7 +24,7 @@ class BrandTitle extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("DoDone", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 60.0)),
+            const Text("DoDone", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 60.0)),
             const SizedBox(height: 10.0),
             Text(
               '   ${remainingTasks == 0 ? 'All Done!' : '$remainingTasks ${remainingTasks <= 1 ? 'Task' : 'Tasks'} remaining'}',

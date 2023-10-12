@@ -17,13 +17,11 @@ class TaskData extends ChangeNotifier {
     SharedPreferences pref = await SharedPreferences.getInstance();
 
     List<String> jsonList = _tasks.map((task) => task.toJson()).toList();
-    pref.setStringList('tasks', jsonList).then((status) {
-      if (status) {
-        // print('Saved');
-      } else {
-        // print('Failed to save');
-      }
-    });
+    pref.setStringList('tasks', jsonList);
+
+    if (pref.getBool('firstTime') == null) {
+      pref.setBool('firstTime', false);
+    }
   }
 
   void getTasksFromSharedPreferences() async {
@@ -40,7 +38,9 @@ class TaskData extends ChangeNotifier {
 
       notifyListeners();
 
-      NotificationService().scheduleNotification(_remainingTasks);
+      bool isFirstTime = pref.getBool('firstTime') ?? true;
+      int tasksToNotify = isFirstTime ? -1 : _remainingTasks;
+      NotificationService().scheduleNotification(tasksToNotify);
     } catch(e) {
       // print('Error $e');
     }
@@ -70,6 +70,15 @@ class TaskData extends ChangeNotifier {
     notifyListeners();
 
     NotificationService().scheduleNotification(_remainingTasks);
+  }
+
+  void editTask(Task? task, String title, String description) {
+    task?.title = title;
+    task?.description = description;
+
+    saveTasksToSharedPreferences();
+
+    notifyListeners();
   }
 
   void deleteTask(Task task) {
