@@ -10,6 +10,7 @@ class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var taskData = Provider.of<TaskData>(context);
+    double textScaleFactor = MediaQuery.textScaleFactorOf(context);
 
     return  Container(
       decoration: const BoxDecoration(
@@ -23,7 +24,6 @@ class TaskScreen extends StatelessWidget {
 
           return GestureDetector(
             onLongPress: () {
-              print('long');
               showModalBottomSheet(
                   isScrollControlled: true,
                   backgroundColor: Colors.transparent,
@@ -40,7 +40,7 @@ class TaskScreen extends StatelessWidget {
               key: Key(index.toString()),
               tilePadding: const EdgeInsets.symmetric(horizontal: 20.0),
               childrenPadding: const EdgeInsets.only(top: 5.0, left: 35.0, right: 35.0, bottom: 20.0),
-              title: Text(task.title, style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w600, decoration: task.isDone ? TextDecoration.lineThrough : null)),
+              title: Text(task.title, style: TextStyle(fontSize: 20.0 * textScaleFactor, fontWeight: FontWeight.w600, decoration: task.isDone ? TextDecoration.lineThrough : null)),
               leading: Checkbox(
                 onChanged: (newValue) {
                   taskData.updateTask(task);
@@ -53,11 +53,11 @@ class TaskScreen extends StatelessWidget {
                 onPressed: () {
                   taskData.deleteTask(task);
                 },
-                icon: Icon(Icons.delete_forever, color: Color(0xFF8B0000)),
+                icon: const Icon(Icons.delete_forever, color: Color(0xFF8B0000)),
               ),
               shape: Border.all(color: Colors.transparent),
               children: [
-                Text(task.description, style: const TextStyle(fontSize: 20.0)),
+                Text(task.description, style: TextStyle(fontSize: 20.0 * textScaleFactor)),
               ],
             ),
           );

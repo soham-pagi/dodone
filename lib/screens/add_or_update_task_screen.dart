@@ -5,12 +5,12 @@ import 'package:my_todo/models/task_data.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class AddOrUpdateTaskScreen extends StatefulWidget {
-  late bool addScreen;
-  late Task? task;
-  late String title;
-  late String description;
+  final bool addScreen;
+  final Task? task;
+  final String title;
+  final String description;
 
-  AddOrUpdateTaskScreen({super.key, this.addScreen = true, this.title = '', this.description = '', this.task});
+  const AddOrUpdateTaskScreen({super.key, this.addScreen = true, this.title = '', this.description = '', this.task});
 
   @override
   State<AddOrUpdateTaskScreen> createState() => _AddOrUpdateTaskScreenState();
@@ -34,6 +34,8 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+
     return Container(
       padding: EdgeInsets.only(top: 30.0, bottom: MediaQuery.of(context).viewInsets.bottom + 40),
       decoration: const BoxDecoration(
@@ -44,7 +46,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(_addScreen ? 'New Task' : 'Update Task', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0, fontWeight: FontWeight.w600)),
+          Text(_addScreen ? 'New Task' : 'Update Task', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0 * textScaleFactor, fontWeight: FontWeight.w600)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: TextField(
@@ -54,7 +56,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
               decoration: const InputDecoration(
                 labelText: 'Title',
               ),
-              style: const TextStyle(fontSize: 20.0),
+              style: TextStyle(fontSize: 20.0 * textScaleFactor),
               cursorColor: const Color(0xFF00ADB5),
             ),
           ),
@@ -67,7 +69,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
                 labelText: 'Description',
                 border: OutlineInputBorder(),
               ),
-              style: const TextStyle(fontSize: 20.0),
+              style: TextStyle(fontSize: 20.0 * textScaleFactor),
               cursorColor: const Color(0xFF00ADB5),
             ),
           ),
@@ -81,7 +83,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
                   gravity: ToastGravity.BOTTOM,
                   textColor: Colors.white,
                   backgroundColor:  Colors.grey,
-                  fontSize: 20.0,
+                  fontSize: 20.0 * textScaleFactor,
                 );
 
                 return;
@@ -102,7 +104,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               )),
             ),
-            child: Text(_addScreen ? 'Add' : 'Update', style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.w500)),
+            child: Text(_addScreen ? 'Add' : 'Update', style: TextStyle(fontSize: 25.0 * textScaleFactor, fontWeight: FontWeight.w500)),
           )
         ],
       ),
