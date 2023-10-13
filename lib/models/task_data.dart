@@ -92,6 +92,15 @@ class TaskData extends ChangeNotifier {
     NotificationService().scheduleNotification(_remainingTasks);
   }
 
+  void deleteAllTasks() {
+    _tasks.clear();
+    _remainingTasks = 0;
+
+    saveTasksToSharedPreferences();
+
+    notifyListeners();
+  }
+
   UnmodifiableListView<Task> get allTasks {
     return UnmodifiableListView(_tasks);
   }

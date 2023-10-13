@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'task_screen.dart';
-import 'brand_title.dart';
-import 'add_or_update_task_screen.dart';
+import 'package:my_todo/models/task_data.dart';
+import 'package:provider/provider.dart';
+import '../widgets/task_list.dart';
+import '../widgets/brand_title.dart';
+import '../widgets/add_or_update_task.dart';
+import 'package:my_todo/utils/utils.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -9,6 +12,43 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(40.0),
+        child: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          actions: [
+            PopupMenuButton(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              ),
+              color: const Color(0xFFD3D4D8),
+              icon: const Icon(Icons.more_vert_rounded, color: Colors.white,),
+              itemBuilder: (context) => [
+                PopupMenuItem(
+                  onTap: () => print('Tapp'),
+                  child: const Text('Help')
+                ),
+                PopupMenuItem(
+                  onTap: () => print('About'),
+                  child: const Text('About')
+                ),
+                PopupMenuItem(
+                  child: const Text('Clear all'),
+                  onTap: () {
+                    try {
+                      context.read<TaskData>().deleteAllTasks();
+                      showMessage(msg: 'Delete successfully');
+                    } catch (e) {
+                      showMessage(msg: 'Failed to delete');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
       resizeToAvoidBottomInset: false,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -26,11 +66,8 @@ class MainScreen extends StatelessWidget {
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // BrandTitle(),
           BrandTitle(),
-          Expanded(child: TaskScreen()),
-          // Expanded(flex: 1, child: BrandTitle()),
-          // Expanded(flex: 5, child: TaskScreen()),
+          TaskScreen(),
         ],
       ),
     );

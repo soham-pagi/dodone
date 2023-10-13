@@ -96,7 +96,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
               )),
             ),
             child: Text(_addScreen ? 'Add' : 'Update', style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Color(0xFFD3D4D8))),
-          )
+          ),
         ],
       ),
     );
