@@ -11,20 +11,19 @@ class BrandTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     int remainingTasks = Provider.of<TaskData>(context).remainingTasks;
-    double textScaleFactor = MediaQuery.of(context).textScaleFactor;
 
     return Container(
-      height: 180.0,
-      padding: const EdgeInsets.only(left: 25.0, bottom: 25.0),
+      height: 165.0,
+      padding: const EdgeInsets.only(left: 30.0, bottom: 20.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(_brandTitle, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 60.0)),
+          Text(_brandTitle, textScaleFactor: 0.85, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 60.0)),
           const SizedBox(height: 10.0),
           Text(
             '   ${remainingTasks == 0 ? 'All Done!' : '$remainingTasks ${remainingTasks <= 1 ? 'Task' : 'Tasks'} remaining'}',
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20.0 * textScaleFactor ),
+            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w600, fontSize: 20.0 ),
           ),
         ],
       ),

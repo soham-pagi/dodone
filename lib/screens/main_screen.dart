@@ -17,7 +17,7 @@ class MainScreen extends StatelessWidget {
             backgroundColor: Colors.transparent,
             context: context,
             builder: (BuildContext context) {
-              return AddOrUpdateTaskScreen();
+              return const AddOrUpdateTaskScreen();
             }
           );
         },

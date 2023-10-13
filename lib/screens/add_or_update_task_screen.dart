@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_todo/models/task.dart';
 import 'package:provider/provider.dart';
 import 'package:my_todo/models/task_data.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:my_todo/utils/utils.dart';
 
 class AddOrUpdateTaskScreen extends StatefulWidget {
   final bool addScreen;
@@ -34,7 +34,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    double scale = MediaQuery.of(context).textScaleFactor.clamp(0.85, 0.95);
 
     return Container(
       padding: EdgeInsets.only(top: 30.0, bottom: MediaQuery.of(context).viewInsets.bottom + 40),
@@ -46,7 +46,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(_addScreen ? 'New Task' : 'Update Task', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0 * textScaleFactor, fontWeight: FontWeight.w600)),
+          Text(_addScreen ? 'New Task' : 'Update Task', textAlign: TextAlign.center, textScaleFactor: scale, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0, fontWeight: FontWeight.bold)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: TextField(
@@ -56,8 +56,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
               decoration: const InputDecoration(
                 labelText: 'Title',
               ),
-              style: TextStyle(fontSize: 20.0 * textScaleFactor),
-              cursorColor: const Color(0xFF00ADB5),
+              style: const TextStyle(fontSize: 20.0),
             ),
           ),
           Padding(
@@ -69,8 +68,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
                 labelText: 'Description',
                 border: OutlineInputBorder(),
               ),
-              style: TextStyle(fontSize: 20.0 * textScaleFactor),
-              cursorColor: const Color(0xFF00ADB5),
+              style: const TextStyle(fontSize: 20.0),
             ),
           ),
           ElevatedButton(
@@ -78,14 +76,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
               String title = _titleController.text.trim();
               String description = _descriptionController.text.trim();
               if (title.isEmpty) {
-                Fluttertoast.showToast(
-                  msg: "Please enter the title",
-                  gravity: ToastGravity.BOTTOM,
-                  textColor: Colors.white,
-                  backgroundColor:  Colors.grey,
-                  fontSize: 20.0 * textScaleFactor,
-                );
-
+                showMessage(msg: 'Please enter title');
                 return;
               }
 
@@ -104,7 +95,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
                 borderRadius: BorderRadius.circular(10.0),
               )),
             ),
-            child: Text(_addScreen ? 'Add' : 'Update', style: TextStyle(fontSize: 25.0 * textScaleFactor, fontWeight: FontWeight.w500)),
+            child: Text(_addScreen ? 'Add' : 'Update', style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Color(0xFFD3D4D8))),
           )
         ],
       ),
