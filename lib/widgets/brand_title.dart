@@ -16,10 +16,8 @@ class BrandTitle extends StatelessWidget {
       baseline: 60,
       baselineType: TextBaseline.alphabetic,
       child: Container(
-        // height: 120.0,
         padding: const EdgeInsets.only(left: 25.0, bottom: 20.0),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(_brandTitle, textScaleFactor: 0.85, style: const TextStyle(color: Colors.white, fontWeight: FontWeight.w900, fontSize: 60.0)),

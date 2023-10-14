@@ -4,7 +4,8 @@ import 'package:provider/provider.dart';
 import '../widgets/task_list.dart';
 import '../widgets/brand_title.dart';
 import '../widgets/add_or_update_task.dart';
-import 'package:my_todo/utils/utils.dart';
+import 'package:my_todo/utils/dialog_utils.dart';
+import 'package:my_todo/constants.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -13,32 +14,33 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(40.0),
+        preferredSize: const Size.fromHeight(50.0),
         child: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.transparent,
           actions: [
             PopupMenuButton(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              ),
-              color: const Color(0xFFD3D4D8),
+              shape: kRoundBorderShape,
+              color: kSecondaryColor,
               icon: const Icon(Icons.more_vert_rounded, color: Colors.white,),
               itemBuilder: (context) => [
                 PopupMenuItem(
-                  onTap: () => print('Tapp'),
-                  child: const Text('Help')
+                  onTap: () => showHelpDialog(context: context),
+                  child: const Text('Help', style: kDefaultFontStyle,)
                 ),
                 PopupMenuItem(
-                  onTap: () => print('About'),
-                  child: const Text('About')
+                  onTap: () => showAppAboutDialog(context: context),
+                  child: const Text('About', style: kDefaultFontStyle,)
                 ),
                 PopupMenuItem(
-                  child: const Text('Clear all'),
+                  child: const Text('Erase all', style: TextStyle(fontSize: 20.0, color: kRedColor),),
                   onTap: () {
                     try {
-                      context.read<TaskData>().deleteAllTasks();
-                      showMessage(msg: 'Delete successfully');
+                      showAlertDialog(
+                        context: context,
+                        title: 'Are you sure?',
+                        description: 'This will delete all the tasks!',
+                        yesMsg: 'All tasks cleared',
+                        yesAction: context.read<TaskData>().deleteAllTasks
+                      );
                     } catch (e) {
                       showMessage(msg: 'Failed to delete');
                     }

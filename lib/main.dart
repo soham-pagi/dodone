@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'screens/main_screen.dart';
 import 'models/task_data.dart';
 import 'services/notification_service.dart';
+import 'constants.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,21 +33,28 @@ class DoDone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData(
-          textSelectionTheme: const TextSelectionThemeData(cursorColor: Color(0xFF00ADB5), selectionColor: Color(0xFF3FBAC2), selectionHandleColor: Color(0xFF3FBAC2)),
-          primaryColor: const Color(0xFF3FBAC2),
-          scaffoldBackgroundColor: const Color(0xFF3FBAC2),
-          colorScheme: ColorScheme.fromSwatch(accentColor: const Color(0xFF3FBAC2)),
-          fontFamily: 'Comfortaa',
-          inputDecorationTheme: const InputDecorationTheme(
-            floatingLabelStyle: TextStyle(color: Color(0xFF00ADB5)),
-            border: OutlineInputBorder(),
-            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color(0xFF11BFAE), width: 1.0)),// Change the border color when focused
+    return SafeArea(
+      child: MaterialApp(
+          theme: ThemeData(
+            appBarTheme: const AppBarTheme(
+              backgroundColor: kPrimaryColor,
+              elevation: 0,
+            ),
+            cardColor: kSecondaryColor,
+            textSelectionTheme: const TextSelectionThemeData(cursorColor: kPrimaryColor, selectionColor: kPrimaryColor, selectionHandleColor: kPrimaryColor),
+            primaryColor: kPrimaryColor,
+            scaffoldBackgroundColor: kPrimaryColor,
+            colorScheme: ColorScheme.fromSwatch(accentColor: kPrimaryColor),
+            fontFamily: 'Comfortaa',
+            inputDecorationTheme: const InputDecorationTheme(
+              floatingLabelStyle: TextStyle(color: kPrimaryColor),
+              border: OutlineInputBorder(),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: kBorderSideColor, width: 1.0)),// Change the border color when focused
+            ),
           ),
-        ),
-        // home: const SafeArea(child: MainScreen())
-        home: const SafeArea(child: MainScreen())
+          // home: const SafeArea(child: MainScreen())
+          home: const MainScreen()
+      ),
     );
   }
 }

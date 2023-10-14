@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_todo/models/task.dart';
 import 'package:provider/provider.dart';
 import 'package:my_todo/models/task_data.dart';
-import 'package:my_todo/utils/utils.dart';
+import 'package:my_todo/utils/dialog_utils.dart';
 
 class AddOrUpdateTaskScreen extends StatefulWidget {
   final bool addScreen;
@@ -34,8 +34,6 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double scale = MediaQuery.of(context).textScaleFactor.clamp(0.85, 0.95);
-
     return Container(
       padding: EdgeInsets.only(top: 30.0, bottom: MediaQuery.of(context).viewInsets.bottom + 40),
       decoration: const BoxDecoration(
@@ -46,7 +44,7 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(_addScreen ? 'New Task' : 'Update Task', textAlign: TextAlign.center, textScaleFactor: scale, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0, fontWeight: FontWeight.bold)),
+          Text(_addScreen ? 'New Task' : 'Update Task', textAlign: TextAlign.center, style: TextStyle(color: Theme.of(context).primaryColor, fontSize: 35.0, fontWeight: FontWeight.bold)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
             child: TextField(
@@ -71,31 +69,34 @@ class _AddOrUpdateTaskScreenState extends State<AddOrUpdateTaskScreen> {
               style: const TextStyle(fontSize: 20.0),
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              String title = _titleController.text.trim();
-              String description = _descriptionController.text.trim();
-              if (title.isEmpty) {
-                showMessage(msg: 'Please enter title');
-                return;
-              }
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: ElevatedButton(
+              onPressed: () {
+                String title = _titleController.text.trim();
+                String description = _descriptionController.text.trim();
+                if (title.isEmpty) {
+                  showMessage(msg: 'Please enter title');
+                  return;
+                }
 
-              if (_addScreen) {
-                context.read<TaskData>().createTask(title, description);
-              } else {
-                context.read<TaskData>().editTask(_task, title, description);
-              }
+                if (_addScreen) {
+                  context.read<TaskData>().createTask(title, description);
+                } else {
+                  context.read<TaskData>().editTask(_task, title, description);
+                }
 
-              Navigator.pop(context);
-            },
-            style: ButtonStyle(
-              minimumSize: MaterialStateProperty.all<Size>(Size(MediaQuery.of(context).size.width - 40, 50)),
-              backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
-              shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              )),
+                Navigator.pop(context);
+              },
+              style: ButtonStyle(
+                minimumSize: MaterialStateProperty.all<Size>(const Size(double.infinity, 50)),
+                backgroundColor: MaterialStateProperty.all<Color>(Theme.of(context).primaryColor),
+                shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                )),
+              ),
+              child: Text(_addScreen ? 'Add' : 'Update', style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Color(0xFFD3D4D8))),
             ),
-            child: Text(_addScreen ? 'Add' : 'Update', style: const TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Color(0xFFD3D4D8))),
           ),
         ],
       ),
