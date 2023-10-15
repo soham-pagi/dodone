@@ -12,7 +12,7 @@ const kRoundBorderShape = RoundedRectangleBorder(borderRadius: BorderRadius.all(
 const kSmallFontStyle = TextStyle(fontSize: 18.0);
 const kDefaultFontStyle = TextStyle(fontSize: 20.0);
 const kPrimaryFontStyle = TextStyle(fontWeight: FontWeight.bold, color: kPrimaryColor, fontSize: 19.0);
-const kDialogTitleStyle = TextStyle(fontSize: 22.0, color: kPrimaryColor, fontWeight: FontWeight.bold);
+const kDialogTitleStyle = TextStyle(fontSize: 22.0, color: kPrimaryColor, fontWeight: FontWeight.w900);
 const kDefaultDialogButtonStyle = TextStyle(fontSize: 19.0, color: kPrimaryColor);
 
 // button style

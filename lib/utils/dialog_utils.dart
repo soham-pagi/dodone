@@ -15,7 +15,7 @@ void showMessage({required String msg}) {
 
 void showHelpDialog({required BuildContext context}) {
   final List<Map<String, String>> instructions = [
-    {'text': 'Add Task: ', 'description': 'Tap "+" to add a task.'},
+    {'text': 'Add Task: ', 'description': 'Tap ＋ to add a task.'},
     {'text': 'Edit Task: ', 'description': 'Hold on title edit existing task.'},
     {'text': 'View: ', 'description': 'Tap title to view description.'},
     {'text': 'Copy: ', 'description': 'Double-tap to copy text.'},
@@ -35,7 +35,7 @@ void showHelpDialog({required BuildContext context}) {
     var textWidget = Text.rich(
       TextSpan(
         children: [
-          TextSpan(text: instructionText, style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700)),
+          TextSpan(text: instructionText, style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900)),
           TextSpan(text: instructionDescription, style: const TextStyle(fontSize: 20.0)),
         ],
       ),
@@ -51,7 +51,7 @@ void showHelpDialog({required BuildContext context}) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        insetPadding: EdgeInsets.zero,
+        insetPadding: const EdgeInsets.symmetric(horizontal: 10.0),
         shape: kRoundBorderShape,
         backgroundColor: kSecondaryColor,
         title: const Text('Quick Start Guide', textAlign: TextAlign.center, style: kDialogTitleStyle,),
@@ -139,7 +139,6 @@ void showAppAboutDialog({required BuildContext context}) {
         );
       }
     );
-
   });
 }
 

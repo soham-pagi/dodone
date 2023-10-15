@@ -33,28 +33,26 @@ class DoDone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: MaterialApp(
-          theme: ThemeData(
-            appBarTheme: const AppBarTheme(
-              backgroundColor: kPrimaryColor,
-              elevation: 0,
-            ),
-            cardColor: kSecondaryColor,
-            textSelectionTheme: const TextSelectionThemeData(cursorColor: kPrimaryColor, selectionColor: kPrimaryColor, selectionHandleColor: kPrimaryColor),
-            primaryColor: kPrimaryColor,
-            scaffoldBackgroundColor: kPrimaryColor,
-            colorScheme: ColorScheme.fromSwatch(accentColor: kPrimaryColor),
-            fontFamily: 'Comfortaa',
-            inputDecorationTheme: const InputDecorationTheme(
-              floatingLabelStyle: TextStyle(color: kPrimaryColor),
-              border: OutlineInputBorder(),
-              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: kBorderSideColor, width: 1.0)),// Change the border color when focused
-            ),
+    return MaterialApp(
+        theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            backgroundColor: kPrimaryColor,
+            elevation: 0,
           ),
-          // home: const SafeArea(child: MainScreen())
-          home: const MainScreen()
-      ),
+          cardColor: kSecondaryColor,
+          textSelectionTheme: const TextSelectionThemeData(cursorColor: kPrimaryColor, selectionColor: kPrimaryColor, selectionHandleColor: kPrimaryColor),
+          primaryColor: kPrimaryColor,
+          scaffoldBackgroundColor: kPrimaryColor,
+          colorScheme: ColorScheme.fromSwatch(accentColor: kPrimaryColor),
+          fontFamily: 'Comfortaa',
+          inputDecorationTheme: const InputDecorationTheme(
+            floatingLabelStyle: TextStyle(color: kPrimaryColor),
+            border: OutlineInputBorder(),
+            focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: kBorderSideColor, width: 1.0)),// Change the border color when focused
+          ),
+        ),
+        // home: const SafeArea(child: MainScreen())
+        home: const SafeArea(child: MainScreen())
     );
   }
 }
