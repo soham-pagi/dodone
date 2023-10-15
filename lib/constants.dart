@@ -4,6 +4,7 @@ const kPrimaryColor = Color(0xFF3FBAC2);
 const kSecondaryColor = Color(0xFFD3D4D8);
 const kBorderSideColor = Color(0xFF11BFAE);
 const kRedColor = Colors.red;
+const kGitHubPrimary = Color(0xFF6e5494);
 
 // shape
 const kRoundBorderShape = RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(20.0)),);

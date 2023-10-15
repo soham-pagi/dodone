@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.soham" "\0"
-            VALUE "FileDescription", "my_todo" "\0"
+            VALUE "CompanyName", "com.example" "\0"
+            VALUE "FileDescription", "dodone" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "my_todo" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2023 com.soham. All rights reserved." "\0"
-            VALUE "OriginalFilename", "my_todo.exe" "\0"
-            VALUE "ProductName", "my_todo" "\0"
+            VALUE "InternalName", "com.dodone" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2023 com.example. All rights reserved." "\0"
+            VALUE "OriginalFilename", "dodone.exe" "\0"
+            VALUE "ProductName", "dodone" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

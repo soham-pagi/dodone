@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:my_todo/constants.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void showMessage({required String msg}) {
   Fluttertoast.showToast(
@@ -133,7 +134,16 @@ void showAppAboutDialog({required BuildContext context}) {
             ],
           ),
           actions: [
-            TextButton(onPressed: () => showLicensePage(context: context), style: kDialogButtonStyle, child: const Text('View Licences', style: kPrimaryFontStyle,)),
+            TextButton(
+              onPressed: () async {
+                const url = 'https://github.com/soham-pagi/dodone';
+                if (await canLaunchUrl(Uri.parse(url))) {
+                  await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+              style: TextButton.styleFrom(foregroundColor: kGitHubPrimary), child: const Text('Github', style: TextStyle(color: kGitHubPrimary, fontWeight: FontWeight.bold, fontSize: 19.0),)),
             TextButton(onPressed: () => Navigator.pop(context), style: kDialogButtonStyle, child: const Text('Close', style: kPrimaryFontStyle))
           ],
         );
