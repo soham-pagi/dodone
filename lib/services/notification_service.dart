@@ -7,11 +7,11 @@ class NotificationService {
 
   NotificationService._internal() {
     var android = const AndroidNotificationDetails(
-        'task_updates',
-        'Task Updates',
-        channelDescription: 'Get Task Updates',
-        importance: Importance.max,
-        priority: Priority.max
+      'task_updates',
+      'Task Updates',
+      channelDescription: 'Get Task Updates',
+      importance: Importance.max,
+      priority: Priority.max,
     );
 
     _platformSpecific = NotificationDetails(android: android);
@@ -24,7 +24,7 @@ class NotificationService {
 
   Future<void> init() async {
     var initializationSettings = const InitializationSettings(
-      android: AndroidInitializationSettings('ic_launcher'),
+      android: AndroidInitializationSettings('notification'),
     );
 
     await _fln.initialize(initializationSettings);
@@ -35,7 +35,7 @@ class NotificationService {
     String title = '', message = '';
     if (remainingTasks == -1) {
       title =  '🎉 Welcome to DoDone! 🎉';
-      message = "Get started by adding your first task! 🚀 To add a task, tap the '+' button and fill in the details. Stay organized and accomplish your goals effortlessly.";
+      message = "Get started by adding your first task! 🚀 To add a task, tap the '＋' button and fill in the details. Stay organized and accomplish your goals effortlessly.";
     }
     else if (remainingTasks == 0) {
       title = 'No Tasks Remaining';
@@ -48,7 +48,7 @@ class NotificationService {
       message = 'Take your time to work on them steadily and make progress at your own pace!';
     }
 
-    await _fln.periodicallyShow(id, title, message, RepeatInterval.everyMinute, _platformSpecific);
+    await _fln.periodicallyShow(id, title, message, RepeatInterval.daily, _platformSpecific);
     // await fln.show(id, title, message, _platformSpecific);
   }
 }
