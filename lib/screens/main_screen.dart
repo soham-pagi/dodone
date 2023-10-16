@@ -63,7 +63,7 @@ class MainScreen extends StatelessWidget {
             }
           );
         },
-        child: const Icon(Icons.add, color: Color(0xFFD3D4D8)),
+        child: const Icon(Icons.add, size: 26.0, color: Color(0xFFD3D4D8)),
       ),
       body: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
