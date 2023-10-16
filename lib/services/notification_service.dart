@@ -48,7 +48,7 @@ class NotificationService {
       message = 'Take your time to work on them steadily and make progress at your own pace!';
     }
 
-    await _fln.periodicallyShow(id, title, message, RepeatInterval.daily, _platformSpecific);
+    await _fln.periodicallyShow(id, title, message, RepeatInterval.everyMinute, _platformSpecific);
     // await fln.show(id, title, message, _platformSpecific);
   }
 }
