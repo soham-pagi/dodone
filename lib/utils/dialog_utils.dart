@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:my_todo/constants.dart';
+import 'package:dodone/constants.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,7 +9,7 @@ void showMessage({required String msg}) {
     msg: msg,
     gravity: ToastGravity.BOTTOM,
     textColor: Colors.white,
-    backgroundColor:  Colors.grey,
+    backgroundColor: Colors.grey,
     fontSize: 18.0,
   );
 }
@@ -26,7 +26,9 @@ void showHelpDialog({required BuildContext context}) {
   ];
 
   List<Widget> textWidgets = [
-    const SizedBox(height: 15.0,)
+    const SizedBox(
+      height: 15.0,
+    )
   ];
 
   for (var instruction in instructions) {
@@ -36,8 +38,13 @@ void showHelpDialog({required BuildContext context}) {
     var textWidget = Text.rich(
       TextSpan(
         children: [
-          TextSpan(text: instructionText, style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900)),
-          TextSpan(text: instructionDescription, style: const TextStyle(fontSize: 20.0)),
+          TextSpan(
+              text: instructionText,
+              style:
+                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w900)),
+          TextSpan(
+              text: instructionDescription,
+              style: const TextStyle(fontSize: 20.0)),
         ],
       ),
     );
@@ -49,31 +56,38 @@ void showHelpDialog({required BuildContext context}) {
   textWidgets.isNotEmpty ? textWidgets.removeLast() : null;
 
   showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        insetPadding: const EdgeInsets.symmetric(horizontal: 10.0),
-        shape: kRoundBorderShape,
-        backgroundColor: kSecondaryColor,
-        title: const Text('Quick Start Guide', textAlign: TextAlign.center, style: kDialogTitleStyle,),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: textWidgets
-        ),
-        actions: [
-          TextButton(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          insetPadding: const EdgeInsets.symmetric(horizontal: 10.0),
+          shape: kRoundBorderShape,
+          backgroundColor: kSecondaryColor,
+          title: const Text(
+            'Quick Start Guide',
+            textAlign: TextAlign.center,
+            style: kDialogTitleStyle,
+          ),
+          content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: textWidgets),
+          actions: [
+            TextButton(
               onPressed: () => Navigator.pop(context),
               style: kDialogButtonStyle,
               child: const Text("Done", style: kDefaultDialogButtonStyle),
-          ),
-        ],
-      );
-    }
-  );
+            ),
+          ],
+        );
+      });
 }
 
-void showAlertDialog({required BuildContext context, required String title, String description = '', VoidCallback? yesAction, required String yesMsg}) {
+void showAlertDialog(
+    {required BuildContext context,
+    required String title,
+    String description = '',
+    VoidCallback? yesAction,
+    required String yesMsg}) {
   showDialog(
     context: context,
     builder: (context) {
@@ -85,21 +99,21 @@ void showAlertDialog({required BuildContext context, required String title, Stri
         content: Text(description, style: kDefaultFontStyle),
         actions: [
           TextButton(
-            onPressed: () {
-              if (yesAction != null) {
-                yesAction();
-              }
-              Navigator.pop(context);
-              showMessage(msg: yesMsg);
-            },
-            style: kDialogDangerButtonStyle,
-            child: const Text("Yes", style: TextStyle(fontSize: 20.0, color: kRedColor))
-          ),
+              onPressed: () {
+                if (yesAction != null) {
+                  yesAction();
+                }
+                Navigator.pop(context);
+                showMessage(msg: yesMsg);
+              },
+              style: kDialogDangerButtonStyle,
+              child: const Text("Yes",
+                  style: TextStyle(fontSize: 20.0, color: kRedColor))),
           TextButton(
-            onPressed: () => Navigator.pop(context),
-            style: kDialogButtonStyle,
-            child: const Text("No", style: TextStyle(fontSize: 20.0, color: kPrimaryColor))
-          ),
+              onPressed: () => Navigator.pop(context),
+              style: kDialogButtonStyle,
+              child: const Text("No",
+                  style: TextStyle(fontSize: 20.0, color: kPrimaryColor))),
         ],
       );
     },
@@ -114,41 +128,58 @@ void showAppAboutDialog({required BuildContext context}) {
     String buildNumber = packageInfo.buildNumber;
 
     showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          insetPadding: EdgeInsets.zero,
-          shape: kRoundBorderShape,
-          backgroundColor: kSecondaryColor,
-          title: Row(children: [
-            Image.asset('images/logo.png'),
-            Text(appName, style: const TextStyle(fontSize: 24.0),)
-          ],),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('package name: $packageName', style: kDefaultFontStyle,),
-              Text('version: $version', style: kDefaultFontStyle),
-              Text('build number: $buildNumber', style: kDefaultFontStyle)
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            insetPadding: EdgeInsets.zero,
+            shape: kRoundBorderShape,
+            backgroundColor: kSecondaryColor,
+            title: Row(
+              children: [
+                Image.asset('images/logo.png'),
+                Text(
+                  appName,
+                  style: const TextStyle(fontSize: 24.0),
+                )
+              ],
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'package name: $packageName',
+                  style: kDefaultFontStyle,
+                ),
+                Text('version: $version', style: kDefaultFontStyle),
+                Text('build number: $buildNumber', style: kDefaultFontStyle)
+              ],
+            ),
+            actions: [
+              TextButton(
+                  onPressed: () async {
+                    const url = 'https://github.com/soham-pagi/dodone';
+                    if (await canLaunchUrl(Uri.parse(url))) {
+                      await launchUrl(Uri.parse(url),
+                          mode: LaunchMode.externalApplication);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  style: TextButton.styleFrom(foregroundColor: kGitHubPrimary),
+                  child: const Text(
+                    'Github',
+                    style: TextStyle(
+                        color: kGitHubPrimary,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 19.0),
+                  )),
+              TextButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: kDialogButtonStyle,
+                  child: const Text('Close', style: kPrimaryFontStyle))
             ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () async {
-                const url = 'https://github.com/soham-pagi/dodone';
-                if (await canLaunchUrl(Uri.parse(url))) {
-                  await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication);
-                } else {
-                  throw 'Could not launch $url';
-                }
-              },
-              style: TextButton.styleFrom(foregroundColor: kGitHubPrimary), child: const Text('Github', style: TextStyle(color: kGitHubPrimary, fontWeight: FontWeight.bold, fontSize: 19.0),)),
-            TextButton(onPressed: () => Navigator.pop(context), style: kDialogButtonStyle, child: const Text('Close', style: kPrimaryFontStyle))
-          ],
-        );
-      }
-    );
+          );
+        });
   });
 }
-

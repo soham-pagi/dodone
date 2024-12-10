@@ -47,6 +47,3 @@ height="80">](https://play.google.com/store/apps/details?id=com.dodone)
 If you find DoDone helpful, consider supporting the project by [buying me a coffee](https://www.buymeacoffee.com/pagisohamz) or leaving a review on [Google Play](https://play.google.com/store/apps/details?id=com.dodone).
 
 [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/pagisohamz)
-
-     
-     
