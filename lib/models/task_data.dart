@@ -6,7 +6,7 @@ import 'task.dart';
 import 'package:dodone/services/notification_service.dart';
 
 class TaskData extends ChangeNotifier {
-  final List<Task> _tasks = [];
+  final Queue<Task> _tasks = Queue();
   int _remainingTasks = 0;
 
   TaskData() {
@@ -52,7 +52,7 @@ class TaskData extends ChangeNotifier {
           'No Description'; // Set default description if null or empty string is passed
     }
     Task task = Task(title: title, description: description);
-    _tasks.add(task);
+    _tasks.addFirst(task);
     _remainingTasks++;
 
     saveTasksToSharedPreferences();
