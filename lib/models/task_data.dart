@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:collection';
 import 'task.dart';
-import 'package:my_todo/services/notification_service.dart';
+import 'package:dodone/services/notification_service.dart';
 
 class TaskData extends ChangeNotifier {
   final List<Task> _tasks = [];
@@ -41,14 +41,15 @@ class TaskData extends ChangeNotifier {
       bool isFirstTime = pref.getBool('firstTime') ?? true;
       int tasksToNotify = isFirstTime ? -1 : _remainingTasks;
       NotificationService().scheduleNotification(tasksToNotify);
-    } catch(e) {
+    } catch (e) {
       // print('Error $e');
     }
   }
 
   void createTask(String title, String description) {
     if (description.isEmpty) {
-      description = 'No Description'; // Set default description if null or empty string is passed
+      description =
+          'No Description'; // Set default description if null or empty string is passed
     }
     Task task = Task(title: title, description: description);
     _tasks.add(task);
